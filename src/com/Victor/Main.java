@@ -7,10 +7,18 @@ import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
 
+       taskMngr(helloMenu());
 
-        switch (helloMenu()) {
+
+
+    }
+
+    public  static void taskMngr(String task) {
+        switch (task) {
+
             case "1": {
                 Sqvt sqvt = new Sqvt();
                 System.out.println("Введите коэфициенты a, b, c квадратного уравнения");
@@ -26,7 +34,6 @@ public class Main {
                     System.out.println("Уравнение " + a + "x^2+" + b + "x+" + c + "имеет следующие корни: x1=" + Math.rint(100.0 * x1) / 100.0 + ", x2=" + Math.rint(100.0 * x2) / 100);
                     //System.out.println("Уравнение " + a + "x^2+" + b + "x+" + c + "имеет следующие корни: x1=" + x1+ ", x2=" + x2);
                 }
-                ifNeedHelloMenu();
                 break;
 
             }
@@ -38,19 +45,19 @@ public class Main {
                 System.out.println("Введите второе число");
                 float second = scanner.nextFloat();
                 System.out.println(calc(first, operator, second));
-                ifNeedHelloMenu();
+
                 break;
 
             }
-            case "3":{
+            case "3": {
                 System.out.println("1 - Цельсий - Фаренгейт\n2 - Фаренгейт - Цельсий");
                 switch (scanner.next()) {
-                    case "1":{
+                    case "1": {
                         System.out.println("Ваедите температуру в Цельсиях");
                         System.out.println("" + tempCalc(scanner.nextFloat(), true) + "F");
                         break;
                     }
-                    case "2":{
+                    case "2": {
                         System.out.println("Ваедите температуру в Фаренгейтах");
                         System.out.println("" + tempCalc(scanner.nextFloat(), false) + "C");
                         break;
@@ -62,21 +69,19 @@ public class Main {
                     }
 
                 }
-                ifNeedHelloMenu();
             }
             case "4": {
                 System.out.println("Введите строку содержащую \"нам\"");
                 //String strNam = scanner.nextLine();
                 String key = "нам";
                 StringBuilder strBld = new StringBuilder(scanner.next());
-                int pos  = strBld.indexOf(key);
-                if(pos == -1){
+                int pos = strBld.indexOf(key);
+                if (pos == -1) {
                     System.out.println("нет совпадений");
-                }else{
-                    strBld.replace(pos, pos+key.length(), "");
+                } else {
+                    strBld.replace(pos, pos + key.length(), "");
                     System.out.println("Строка без " + "\"" + key + "\"" + " имеет вид " + "\"" + strBld + "\"");
                 }
-                ifNeedHelloMenu();
                 break;
             }
 
@@ -85,16 +90,57 @@ public class Main {
                 String key = "хрю";
                 StringBuilder strBld = new StringBuilder(scanner.next());
 
-                int pos  = strBld.indexOf(key);
-                if(pos > 0){
+                int pos = strBld.indexOf(key);
+                if (pos > 0) {
                     System.out.println("хрю есть, но не в начале строки");
-                }else if (pos < 0) {
+                } else if (pos < 0) {
                     System.out.println("совпадений нет");
-                }else{
-                    strBld.replace(key.length(), strBld.length(),"");
+                } else {
+                    strBld.replace(key.length(), strBld.length(), "");
                     System.out.println("Вот что осталось от Вашей строки: " + "\"" + strBld + "\"" + ".");
                 }
-                ifNeedHelloMenu();
+                break;
+            }
+
+            case "6": {
+                System.out.println("Введите строку с окончанием \"па\", и я удалю 4, 5 и 6 символы абсолютно бесплатно!:)");
+                System.out.println("...конечно если Вы соизволите ввести хотя-бы слово из 6 букв ;) ");
+                String key = "па";
+                StringBuilder strBld = new StringBuilder(scanner.next());
+                int origLenInputSrt = strBld.length();
+                int posKey = strBld.indexOf(key);
+                int delIndex = 3;
+
+                //its bad...
+                if (origLenInputSrt >= 10) {
+                    strBld.delete(3, 6);
+                } else if (origLenInputSrt == 9) {
+                    strBld.delete(3, 5);
+                } else if (origLenInputSrt == 8) {
+                    strBld.delete(3, 4);
+                } else {
+                    strBld.deleteCharAt(3);
+                }
+
+
+                System.out.println(strBld);
+
+
+                break;
+            }
+
+            case "7": {
+                System.out.println("Введите строку более 10 знаков для дублирования содержимого");
+                StringBuilder strBld = new StringBuilder(scanner.next());
+                int inputStrLen = strBld.length();
+                if (inputStrLen > 10) {
+                    strBld.append(strBld);
+                    System.out.println(strBld);
+                } else {
+                    System.out.println("бооООольше. Нам нужно больше символов!!!");
+                }
+
+
                 break;
             }
 
@@ -104,24 +150,26 @@ public class Main {
             }
         }
 
-
-
-
     }
 
+
+
     public static String helloMenu(){
+        String m;
         System.out.println("\tДомашнее задание 1 и 2.\nВедите пункт меню");
         System.out.println("1 - решение квадратного уравнения");
         System.out.println("2 - калькулятор");
         System.out.println("3 - преобразователь температуры Цельсий <=> Фаренгейт");
-        System.out.println("4 - Работа со строками введенными через консоль");  //goto:19 in homework_info.txt
-        System.out.println("5 - Работа со строками введенными через консоль");  //goto:22 in homework_info.txt
+        System.out.println("4 - Работа со строками введенными через консоль - замена");  //goto:19 in homework_info.txt
+        System.out.println("5 - Работа со строками введенными через консоль - удаление");  //goto:22 in homework_info.txt
+        System.out.println("6 - Работа со строками введенными через консоль - выборочное удаление с проверкой");  //goto:23 in homework_info.txt
+        System.out.println("7 - Работа со строками введенными через консоль - добавление");  //goto:24 in homework_info.txt
 
 //TODO new points for next homework
         System.out.println("0 - выход");
 
-        String m=scanner.next();
-        if(m=="0"){
+        m=scanner.next();
+        if(m.equals("0")){
             System.out.println("Выход...");
             System.exit(0);
         }
@@ -130,14 +178,14 @@ public class Main {
 
     }
 
+
     public static void ifNeedHelloMenu(){
         System.out.println("\tВведите Q для выхода в главное меню");
         String val = scanner.next();
-        if(val=="q"|val=="Q"){
+        if(val.equalsIgnoreCase("q")){
             helloMenu();
         }else{
-            System.out.println("\t"+val+" это не совсем Q, но вот Вам главное меню :)\n\n");
-            helloMenu();
+
         }
 
     }
