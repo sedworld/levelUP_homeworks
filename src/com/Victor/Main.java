@@ -80,6 +80,24 @@ public class Main {
                 break;
             }
 
+            case "5": {
+                System.out.println("Введите строку содержащую \"хрю\", если \"хрю\" будет в начале строки - остальное фтопку");
+                String key = "хрю";
+                StringBuilder strBld = new StringBuilder(scanner.next());
+
+                int pos  = strBld.indexOf(key);
+                if(pos > 0){
+                    System.out.println("хрю есть, но не в начале строки");
+                }else if (pos < 0) {
+                    System.out.println("совпадений нет");
+                }else{
+                    strBld.replace(key.length(), strBld.length(),"");
+                    System.out.println("Вот что осталось от Вашей строки: " + "\"" + strBld + "\"" + ".");
+                }
+                ifNeedHelloMenu();
+                break;
+            }
+
             default: {
                 System.out.println("Введен неверный пунк меню");
                 helloMenu();
@@ -97,6 +115,7 @@ public class Main {
         System.out.println("2 - калькулятор");
         System.out.println("3 - преобразователь температуры Цельсий <=> Фаренгейт");
         System.out.println("4 - Работа со строками введенными через консоль");  //goto:19 in homework_info.txt
+        System.out.println("5 - Работа со строками введенными через консоль");  //goto:22 in homework_info.txt
 
 //TODO new points for next homework
         System.out.println("0 - выход");
