@@ -64,6 +64,21 @@ public class Main {
                 }
                 ifNeedHelloMenu();
             }
+            case "4": {
+                System.out.println("Введите строку содержащую \"нам\"");
+                //String strNam = scanner.nextLine();
+                String key = "нам";
+                StringBuilder strBld = new StringBuilder(scanner.next());
+                int pos  = strBld.indexOf(key);
+                if(pos == -1){
+                    System.out.println("нет совпадений");
+                }else{
+                    strBld.replace(pos, pos+key.length(), "");
+                    System.out.println("Строка без " + "\"" + key + "\"" + " имеет вид " + "\"" + strBld + "\"");
+                }
+                ifNeedHelloMenu();
+                break;
+            }
 
             default: {
                 System.out.println("Введен неверный пунк меню");
@@ -77,11 +92,17 @@ public class Main {
     }
 
     public static String helloMenu(){
-        System.out.println("\tДомашнее задание 1 и 2.\nВедите пункт меню\n" +
-                "1 - решение квадратного уравнения\n2 - калькулятор\n3 - преобразователь температуры Цельсий <=> Фаренгейт\n" +
-                "4 - выход");
+        System.out.println("\tДомашнее задание 1 и 2.\nВедите пункт меню");
+        System.out.println("1 - решение квадратного уравнения");
+        System.out.println("2 - калькулятор");
+        System.out.println("3 - преобразователь температуры Цельсий <=> Фаренгейт");
+        System.out.println("4 - Работа со строками введенными через консоль");  //goto:19 in homework_info.txt
+
+//TODO new points for next homework
+        System.out.println("0 - выход");
+
         String m=scanner.next();
-        if(m=="4"){
+        if(m=="0"){
             System.out.println("Выход...");
             System.exit(0);
         }
