@@ -10,29 +10,28 @@ public class Main {
 
     public static void main(String[] args) {
 
-       taskMngr(helloMenu());
-
+        taskMngr(helloMenu());
 
 
     }
 
-    public  static void taskMngr(String task) {
+    public static void taskMngr(String task) {
         switch (task) {
 
             case "1": {
                 Sqvt sqvt = new Sqvt();
                 System.out.println("Введите коэфициенты a, b, c квадратного уравнения");
-                double a = scanner.nextDouble();
-                double b = scanner.nextDouble();
-                double c = scanner.nextDouble();
-                Double x1 = sqvt.x1(a, b, c);
-                Double x2 = sqvt.x2(a, b, c);
+                float a = scanner.nextFloat();
+                float b = scanner.nextFloat();
+                float c = scanner.nextFloat();
+                Float x1 = sqvt.x1(a, b, c);
+                Float x2 = sqvt.x2(a, b, c);
 
                 if (sqvt.d < 0) {
                     System.out.println("Уравнение " + a + "x^2+" + b + "x+" + c + " не имеет корней");
                 } else {
-                    System.out.println("Уравнение " + a + "x^2+" + b + "x+" + c + "имеет следующие корни: x1=" + Math.rint(100.0 * x1) / 100.0 + ", x2=" + Math.rint(100.0 * x2) / 100);
-                    //System.out.println("Уравнение " + a + "x^2+" + b + "x+" + c + "имеет следующие корни: x1=" + x1+ ", x2=" + x2);
+                    //System.out.println("Уравнение " + a + "x^2+" + b + "x+" + c + "имеет следующие корни: x1=" + Math.rint(100.0 * x1) / 100.0 + ", x2=" + Math.rint(100.0 * x2) / 100);
+                    System.out.println("Уравнение " + a + "x^2+" + b + "x+" + c + "имеет следующие корни: x1=" + x1 + ", x2=" + x2);
                 }
                 break;
 
@@ -144,13 +143,73 @@ public class Main {
                 break;
             }
 
-            default: {
-                System.out.println("Введен неверный пунк меню");
-                helloMenu();
+            case "8": {
+                int qestionNum = 0;
+                System.out.println("Тест по пройденным лекциям");
+
+                do {
+                    qestionNum++;
+                    testing(qestionNum);
+
+                } while (qestionNum < questions.length);
+
+                break;
             }
+
         }
 
     }
+
+    static String questions[] = {
+            "Укажите непрвильный тип переменной\n" +
+                    "1. integer\t" +
+                    "2. Double\t" +
+                    "3. int\t" +
+                    "4. char",
+            "int a = 2-4*5+3/8\nПеременная \"a\" равна\n" +
+                    "1. -0.875\t" +
+                    "2. 12.3\t" +
+                    "3. 23\t" +
+                    "4. 18",
+            "Каким будет значение z, если boolean z=(2)&&(5)\n" +
+                    "1. TRUE\t" +
+                    "2. 10\t" +
+                    "3. Ошибка на этапе компиляции\t" +
+                    "4. FALSE"};
+
+    static String answers[][] = {
+            {"Верно", "Неверно. Double - правльный тип.", "Неверно", "Неверно"},
+            {"Неверно. int - целочисленное значение", "Неверно. int - целочисленное значение", "Неверно", "Верно"},
+            {"Верно3", "jhjgj", "Верно", "Неверно. Аргументы могут быть только типа boolean"},
+            {"Верно4", "Неверно41", "Неверно42", "Неверно43"},
+            {"Верно5", "Неверно51", "Неверно52", "Неверно53"}
+    };
+
+    private static void testing(int qestionNum) {
+        System.out.println("Вопрос " + qestionNum +":\n"+ questions[qestionNum - 1]);
+        int answer = scanner.nextInt();
+        switch (answer) {
+
+            case 1:
+                System.out.println(answers[qestionNum - 1][answer - 1]+"\n");
+                break;
+            case 2:
+                System.out.println(answers[qestionNum - 1][answer - 1]);
+                break;
+            case 3:
+                System.out.println(answers[qestionNum - 1][answer - 1]);
+                break;
+            case 4:
+                System.out.println(answers[qestionNum + 1][answer - 1]);
+                break;
+            default:
+                System.out.println("Wrong input");
+                break;
+        }
+
+    }
+
+
 
 
 
@@ -164,8 +223,9 @@ public class Main {
         System.out.println("5 - Работа со строками введенными через консоль - удаление");  //goto:22 in homework_info.txt
         System.out.println("6 - Работа со строками введенными через консоль - выборочное удаление с проверкой");  //goto:23 in homework_info.txt
         System.out.println("7 - Работа со строками введенными через консоль - добавление");  //goto:24 in homework_info.txt
+        System.out.println("8 - Программа-тест по пройденному материалу");  //goto:28 in homework_info.txt
 
-//TODO new points for next homework
+
         System.out.println("0 - выход");
 
         m=scanner.next();
@@ -230,28 +290,27 @@ public class Main {
         }
         return temp;
     }
+}
+    class Sqvt {
 
-    public static class Sqvt {
+        public float a, b, c;
+        public Float x1, x2;
 
-        public double a, b, c;
-        public Double x1, x2;
+        float d = b * b + 4 * a * c;
 
-        double d = b * b + 4 * a * c;
-
-        Double x1(double d, double b, double a) {
+        Float x1(float d, float b, float a) {
             if(d>0) {
-                return (Math.sqrt(d) - b) / (2 * a);
+                return ((float)(Math.sqrt((double)d) - b) / (2 * a));
             }else if (d==0) {
                 return (0-b)/(2*a);
             }else return null;
-
         }
 
-        Double x2 (double d, double b, double a){
+        Float x2 (float d, float b, float a){
             if(d>0) {
-                return ((0 - b) - Math.sqrt(d)) / (2 * a);
+                return ((0 - b) - (float)Math.sqrt((double)d))/ (2 * a);
             }else if(d==0){
-                return (float)(0-b)/(2*a);
+                return (0-b)/(2*a);
             }else return null;
         }
 
@@ -261,7 +320,7 @@ public class Main {
 
 
 
-}
+
 
 
 
