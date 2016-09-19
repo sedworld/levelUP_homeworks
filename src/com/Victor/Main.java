@@ -152,7 +152,7 @@ public class Main {
                     testing(qestionNum);
 
                 } while (qestionNum < questions.length);
-
+                System.out.println("Верных ответов "+correctAnswers+"\n");
                 break;
             }
 
@@ -214,11 +214,14 @@ public class Main {
             {"Верно5", "Неверно51", "Неверно52", "Неверно53"},
             {"Верно5", "Неверно51", "Неверно52", "Неверно53"}
     };
-
+    static int correctAnswers=0;
     private static void testing(int qestionNum) {
         System.out.println("Вопрос " + qestionNum +":\n"+ questions[qestionNum - 1]);
         int answer = scanner.nextInt();
         //добавить проверку ввода через regex
+        if(answers[qestionNum-1][answer-1].equals("Верно")){
+            correctAnswers++;
+        }
         switch (answer) {
 
             case 1:
