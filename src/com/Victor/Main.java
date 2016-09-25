@@ -3,6 +3,7 @@ package com.Victor;
 
 
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -10,7 +11,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        taskMngr(helloMenu());
+     menu:
+     {
+         taskMngr(helloMenu());
+     }
 
 
     }
@@ -153,7 +157,38 @@ public class Main {
                     testing(qestionNum);
 
                 } while (qestionNum < questions.length);
-                System.out.println("Верных ответов "+correctAnswers+"\n");
+                System.out.println("Верных ответов " + correctAnswers + "\n");
+                break;
+            }
+
+            case "9": {
+                int arrayFirst[] = {1, 2, 3, 4, 5, 6, 7, 8};
+                int arraySecond[] = {10, 11, 12, 13, 14};
+//                int arrayFirst[] = {10, 21, 38, 44, 52, 68, 75, 84};
+//                int arraySecond[] = {9, 22, 35, 58, 63};
+                int arrayResult[] = new int[arrayFirst.length + arraySecond.length];
+
+                //counters for loops
+                int f = 0;
+                int s = 0;
+                int r = 0;
+
+                //load result array while 1 or 2 are not full scan
+                while(f<arrayFirst.length && s<arraySecond.length){
+                    //result = who is min of 1 and 2 @index loop
+                    //++ all
+                    arrayResult[r++] = arrayFirst[f] < arraySecond[s] ? arrayFirst[f++] : arraySecond[s++];
+                    //System.out.println(Arrays.toString(arrayResult));
+                }
+
+                //load other 1 or 2 arrays values
+                while((arrayFirst.length==f ? s<arraySecond.length : f < arrayFirst.length)){
+                    arrayResult[r++] = arrayFirst.length==f ? arraySecond[s++] : arrayFirst[f++];
+                    //System.out.println(Arrays.toString(arrayResult));
+                }
+
+                System.out.println(Arrays.toString(arrayResult));
+
                 break;
             }
 
@@ -247,10 +282,11 @@ public class Main {
             {"Верно5", "Неверно51", "Неверно52", "Неверно53"}
     };
     static int correctAnswers=0;
+
     private static void testing(int qestionNum) {
         System.out.println("Вопрос " + qestionNum +":\n"+ questions[qestionNum - 1]);
-        int answer = scanner.nextInt();
-        //добавить проверку ввода через regex
+            int answer= scanner.nextInt();
+
 
             switch (answer) {
 
@@ -292,6 +328,7 @@ public class Main {
         System.out.println("6 - Работа со строками введенными через консоль - выборочное удаление с проверкой");  //goto:23 in homework_info.txt
         System.out.println("7 - Работа со строками введенными через консоль - добавление");  //goto:24 in homework_info.txt
         System.out.println("8 - Программа-тест по пройденному материалу");  //goto:28 in homework_info.txt
+        System.out.println("9 - Слияние двух масивов с сортировкой \"на ходу\"");  //goto:28 in homework_info.txt
 
 
         System.out.println("0 - выход");
