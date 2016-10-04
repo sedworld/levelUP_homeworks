@@ -187,6 +187,8 @@ public class Main {
                     //System.out.println(Arrays.toString(arrayResult));
                 }
 
+                //System.arraycopy(arraySecond,s,arrayResult,r,arrayResult.length-r);
+
                 System.out.println(Arrays.toString(arrayResult));
 
                 break;
